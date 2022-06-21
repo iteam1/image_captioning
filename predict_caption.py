@@ -20,13 +20,15 @@ args = parser.parse_args()
 
 # read trained word to index dictionary
 wordtoix = load(open('./wordtoix.pkl','rb'))
+ixtoword = load(open('./ixtoword.pkl','rb'))
 
 # load trained model
 model = tf.keras.models.load_model('./model_flickr8k')
 #load feature extractor
 #inception_v3 = InceptionV3(weights = 'imagenet')
 #feature_extractor = Model(inception_v3.input,inception_v3.layers[-2].output)
-feature_extractor = tf.keras.model.load_model('./feature_extractor')
+feature_extractor = tf.keras.models.load_model('./feature_extractor')
+max_length = 31
 
 # load image and proprocess into Inception v3
 def preprocess(image_path):
@@ -53,7 +55,7 @@ def greedySearch(feature_vector,verbose = 0):
   for i in range(max_length):
     sequence = [wordtoix[word] for word in in_text.split() if word in wordtoix]
     sequence = pad_sequences([sequence],maxlen = max_length)
-    yhat = model_word.predict([feature_vector,sequence],verbose = verbose) # [(1,2048),(1,31)]
+    yhat = model.predict([feature_vector,sequence],verbose = verbose) # [(1,2048),(1,31)]
     yhat = np.argmax(yhat) # (1610,)
     word = ixtoword[yhat] 
     in_text += ' ' + word
