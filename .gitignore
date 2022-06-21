@@ -8,4 +8,4 @@ __pycache__
 *.zip
 
 # jupyter notebook checkpoint
-./ipynb_checkpoints
+.ipynb_checkpoints
