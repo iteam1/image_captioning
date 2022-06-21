@@ -67,8 +67,12 @@ def greedySearch(feature_vector,verbose = 0):
   return final
 
 if __name__ == "__main__":
-	feature_vector = encode(args.img,feature_extractor) # (2048,)
-	img = plt.imread(args.img)
-	plt.imshow(img)
-	plt.title(greedySearch(feature_vector,0))
-	plt.show()
+  feature_vector = encode(args.img,feature_extractor) # (2048,)
+  caption = greedySearch(feature_vector,0)
+  if args.show:
+    img = plt.imread(args.img)
+    plt.imshow(img)
+    plt.title(caption)
+    plt.show()
+  else:
+    print("caption: " + caption)
