@@ -26,6 +26,8 @@ we use pretrained model `inceptionV3` with `imageNet` to extract the *feature ve
 - argparse
 - pickle
 
+**OS-system**
+Linux Ubutu 18.04
 
 **Download assets**
 
