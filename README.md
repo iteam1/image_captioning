@@ -24,6 +24,7 @@ we use pretrained model `inceptionV3` with `imageNet` to extract the *feature ve
 - OpenCV
 - Tensorflow
 - argparse
+- pickle
 
 **Download assets**
 
