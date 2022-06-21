@@ -14,10 +14,6 @@ use InceptionV3 and LSTM model for making the caption in images, this demo will 
 
 we use pretrained model `inceptionV3` with `imageNet` to extract the *feature vector* `(2048,)` convert to a vector `(256,)`, sum it with `LSTM` output to predict the next word in the sentence
 
-- Model architecture
-
-![model_architecture](./imgs/model_architecture.png)
-
 **Required libraries**
 
 - Flask
@@ -30,9 +26,9 @@ we use pretrained model `inceptionV3` with `imageNet` to extract the *feature ve
 
 ### References
 
-[nntuan8](https://github.com/Locchuong96/Machine-Learning/blob/main/Courses/DL_Tutorial/L15/Automatic%20Image%20Captioning.ipynb)
-
 [image caption](https://github.com/divyanshj16/Image-Captioning)
+
+[nntuan8](https://github.com/Locchuong96/Machine-Learning/blob/main/Courses/DL_Tutorial/L15/Automatic%20Image%20Captioning.ipynb)
 
 [image-caption-using-tensor-flow](https://www.kaggle.com/code/priyankasharma251997/image-caption-using-tensor-flow)
 
