@@ -22,7 +22,6 @@ we use pretrained model `inceptionV3` with `imageNet` to extract the *feature ve
 
 - Flask
 - OpenCV
-- Tensorflow
 
 **Download assets**
 
