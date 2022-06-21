@@ -1,6 +1,11 @@
 # virtual environment
-enn
-# pychace
-__pychace__
+env
+
+# pycache
+__pycache__
+
 # zip
 *.zip
+
+# jupyter notebook checkpoint
+./ipynb_checkpoints
