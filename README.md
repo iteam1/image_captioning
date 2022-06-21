@@ -1,6 +1,10 @@
 # image_captioning
 
-use InceptionV3 and LSTM model for making the caption in images
+use InceptionV3 and LSTM model for making the caption in images, this demo will apply the trained model for:
+
+- build machine learning server predict caption for posted image
+
+- predict caption in realtime
 
 **Summary**
 
@@ -13,6 +17,12 @@ we use pretrained model `inceptionV3` with `imageNet` to extract the *feature ve
 - Model architecture
 
 ![model_architecture](./imgs/model_architecture.png)
+
+**Required libraries**
+
+- Flask
+- OpenCV
+- Tensorflow
 
 **Download assets**
 
