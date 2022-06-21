@@ -2,6 +2,18 @@
 
 use InceptionV3 and LSTM model for making the caption in images
 
+**Summary**
+
+- Workflow
+
+![image_captioning](./imgs/image_captioning.png)
+
+we use pretrained model `inceptionV3` with `imageNet` to extract the *feature vector* `(2048,)` convert to a vector `(256,)`, sum it with `LSTM` output to predict the next word in the sentence
+
+- Model architecture
+
+![model_architecture](./imgs/model_architecture.png)
+
 **Download assets**
 
 - dataset included image and 5 caption each image [Flickr8k-dataset](https://www.kaggle.com/datasets/adityajn105/flickr8k)
