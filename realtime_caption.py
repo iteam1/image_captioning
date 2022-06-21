@@ -1,3 +1,4 @@
+import cv2
 import argparse
 import numpy as np
 import tensorflow as tf
@@ -8,15 +9,10 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
 from pickle import load
-import matplotlib.pyplot as plt
+from datetime import datetime
 
-# init parser
-parser = argparse.ArgumentParser(description = 'Use trained model to predict caption of image')
-# add argument to parser
-parser.add_argument('-i','--img',type = str, help = 'directory of image',required = True)
-parser.add_argument('-s','--show',action = 'store_true',help = 'option to display the image')
-# create arguments
-args = parser.parse_args()
+cap = cv2.VideoCapture(0)
+ret,frame = cap.read()
 
 # read trained word to index dictionary
 wordtoix = load(open('./wordtoix.pkl','rb'))
@@ -30,21 +26,25 @@ model = tf.keras.models.load_model('./model_flickr8k')
 feature_extractor = tf.keras.models.load_model('./feature_extractor')
 max_length = 31
 
+# font
+font = cv2.FONT_HERSHEY_SIMPLEX
+fontScale = 0.7
+fontColor = (0,255,255)
+thickness = 1
+lineType = 2
+
 # load image and proprocess into Inception v3
-def preprocess(image_path):
-    # convert all the images to size 299x299 as excepted by the inception v3 model
-    img = image.load_img(image_path,target_size=  (299,299))
-    # convert image into array
-    x= image.img_to_array(img)
-    # add 1 dimension as 1 simple
+def preprocess(frame):
+	# resize it (width,heigth)
+    x = cv2.resize(frame,(299,299),interpolation = cv2.INTER_AREA )
     x = np.expand_dims(x,axis =0) # (n_sample,width,height,colors)
     # preprocess_input
     x = preprocess_input(x) # scale it from 0-255 to 0-1 
     return x
 
 # image embedding with feature_extractor
-def encode(image,feature_extractor):
-    image = preprocess(image) # convert image model input
+def encode(frame,feature_extractor):
+    image = preprocess(frame) # convert image model input
     feature_vector = feature_extractor.predict(image) # get the encoding vector for the image
     # feature_vector = np.ravel(feature_vector) # reshape (1,2048) to (2048,)
     return feature_vector
@@ -66,13 +66,26 @@ def greedySearch(feature_vector,verbose = 0):
     final = ' '.join(final) # convert list to string
   return final
 
+
 if __name__ == "__main__":
-  feature_vector = encode(args.img,feature_extractor) # (2048,)
-  caption = greedySearch(feature_vector,0)
-  if args.show:
-    img = plt.imread(args.img)
-    plt.imshow(img)
-    plt.title(caption)
-    plt.show()
-  else:
-    print("caption: " + caption)
+	
+	while ret:
+		# get new frame
+		ret,frame = cap.read()
+		# Getting the current date and time
+		dt = datetime.now()
+		# extract feature
+		feature_vector = encode(frame,feature_extractor)
+		# predict caption
+		caption = greedySearch(feature_vector,0)
+		# put text
+		cv2.putText(frame,str(dt),(5,20),font,fontScale,fontColor,thickness,lineType)
+		cv2.putText(frame,caption,(5,40),font,fontScale,fontColor,thickness,lineType)
+
+		cv2.imshow('frame',frame)
+
+		if cv2.waitKey(1) == 27:
+			break
+
+	cv2.destroyAllWindows()
+	cap.release()

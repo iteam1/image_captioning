@@ -26,6 +26,9 @@ we use pretrained model `inceptionV3` with `imageNet` to extract the *feature ve
 - argparse
 - pickle
 
+**OS-system**
+Linux Ubutu 18.04
+
 **Download assets**
 
 - dataset included image and 5 caption each image [Flickr8k-dataset](https://www.kaggle.com/datasets/adityajn105/flickr8k)
