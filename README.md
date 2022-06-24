@@ -1,10 +1,16 @@
+<img src="https://img.shields.io/badge/license-MIT-green" /> <img src="https://img.shields.io/badge/version-v0.1-lightgrey" />
+
 # image_captioning
+
+![banner](/imgs/banner.jpg)
 
 use InceptionV3 and LSTM model for making the caption in images, this demo will apply the trained model for:
 
 - build machine learning server predict caption for posted image
 
 - predict caption in realtime
+
+![demo](https://github.com/iteam1/image_captioning/blob/main/imgs/demo.gif)
 
 **Summary**
 
