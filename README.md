@@ -6,7 +6,7 @@ use InceptionV3 and LSTM model for making the caption in images, this demo will 
 
 - predict caption in realtime
 
-[./imgs/demo.gif]
+![demo](https://github.com/iteam1/image_captioning/blob/main/imgs/demo.gif)
 
 **Summary**
 
